@@ -1,0 +1,658 @@
+/* ==========================================================================
+   EROS · Elegí tu RRPP
+   Design tokens
+   --------------------------------------------------------------------------
+   Paleta (inspirada en ilustración floral retro: mostaza, coral, lavanda,
+   crema y verde bosque, en formas planas con textura de grano):
+     --mustard        #E4A72C  fondo principal, amarillo mostaza cálido
+     --mustard-deep   #C88C1B  mostaza oscuro, para sombras/degradés
+     --cream          #FBF1DD  superficie de tarjetas, blanco cálido
+     --cream-deep     #F1E1BE  superficie elevada / hover
+     --coral          #E85B3F  rojo-coral (flores), acento principal
+     --coral-deep     #C23F27  coral oscuro
+     --lavender       #B9A0DE  violeta claro (flores), acento secundario
+     --lavender-deep  #9679C4  violeta oscuro
+     --forest         #1F3B2A  verde bosque oscuro, texto/tinta/bordes
+     --whatsapp       #25D366  verde WhatsApp (reconocible, no se toca)
+
+   Tipografía:
+     Fraunces  -> títulos / display (serif cálida, look afiche vintage)
+     Inter     -> cuerpo de texto / UI
+   ========================================================================== */
+
+:root {
+  --mustard: #e4a72c;
+  --mustard-deep: #c88c1b;
+  --cream: #fbf1dd;
+  --cream-deep: #f1e1be;
+  --coral: #e85b3f;
+  --coral-deep: #c23f27;
+  --lavender: #b9a0de;
+  --lavender-deep: #9679c4;
+  --forest: #1f3b2a;
+  --forest-deep: #12261a;
+  --whatsapp: #25d366;
+  --whatsapp-dark: #1ebe5a;
+  --text-primary: var(--forest);
+  --text-muted: #4f6152;
+  --border-soft: rgba(31, 59, 42, 0.18);
+  --border-ink: var(--forest);
+  --radius-lg: 24px;
+  --radius-md: 16px;
+  --radius-sm: 10px;
+  --shadow-soft: 0 14px 34px rgba(31, 59, 42, 0.16);
+  --shadow-hard: 6px 6px 0 var(--forest);
+  --shadow-hard-sm: 4px 4px 0 var(--forest);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ==========================================================================
+   Reset básico
+   ========================================================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--mustard);
+  color: var(--text-primary);
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  line-height: 1.5;
+  overflow-x: hidden;
+  position: relative;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: inherit;
+}
+
+/* Foco visible para accesibilidad de teclado */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--forest);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ==========================================================================
+   Textura de grano (papel serigrafiado) + sol decorativo de fondo
+   ========================================================================== */
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.16;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  background-size: 180px 180px;
+}
+
+.hero__sun {
+  position: absolute;
+  top: -120px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  background: var(--mustard-deep);
+  opacity: 0.55;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   Ramas florales decorativas (esquinas del hero)
+   ========================================================================== */
+.hero__florals {
+  position: absolute;
+  top: 0;
+  width: 220px;
+  max-width: 34vw;
+  height: auto;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.95;
+}
+
+.hero__florals--left {
+  left: 0;
+}
+
+.hero__florals--right {
+  right: 0;
+  transform: scaleX(-1);
+}
+
+@media (max-width: 640px) {
+  .hero__florals {
+    width: 140px;
+  }
+}
+
+/* ==========================================================================
+   HERO
+   ========================================================================== */
+.hero {
+  position: relative;
+  z-index: 1;
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px 24px 80px;
+  overflow: hidden;
+}
+
+.hero__inner {
+  position: relative;
+  z-index: 2;
+  max-width: 640px;
+  animation: rise 900ms var(--ease-out) both;
+}
+
+.hero__logo-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 28px;
+}
+
+/* Wordmark "EROS" al estilo afiche: tinta plana + sombra dura escalonada */
+.hero__logo-fallback-text {
+  display: inline-block;
+  font-family: "Fraunces", serif;
+  font-weight: 700;
+  font-size: clamp(3rem, 11vw, 5.5rem);
+  letter-spacing: 0.03em;
+  color: var(--coral);
+  text-shadow: 3px 3px 0 var(--forest), 6px 6px 0 rgba(31, 59, 42, 0.25);
+}
+
+.hero__title {
+  font-family: "Fraunces", serif;
+  font-weight: 600;
+  font-style: italic;
+  font-size: clamp(1.6rem, 4.4vw, 2.4rem);
+  letter-spacing: -0.01em;
+  margin-bottom: 18px;
+  color: var(--forest);
+}
+
+.hero__subtitle {
+  font-size: clamp(1rem, 2.4vw, 1.15rem);
+  color: var(--forest);
+  opacity: 0.75;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.hero__scroll-cue {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 26px;
+  height: 42px;
+  border: 2px solid var(--border-ink);
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  padding-top: 8px;
+  z-index: 2;
+}
+
+.hero__scroll-cue span {
+  width: 4px;
+  height: 8px;
+  border-radius: 2px;
+  background: var(--coral);
+  animation: scrollCue 1.8s ease-in-out infinite;
+}
+
+@keyframes scrollCue {
+  0% { opacity: 0; transform: translateY(0); }
+  30% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(14px); }
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================================================
+   CONTROLES: buscador / orden / contador
+   ========================================================================== */
+.controls {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--cream);
+  border-bottom: 2px solid var(--forest);
+  padding: 20px 24px;
+}
+
+.controls__inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #ffffff;
+  border: 2px solid var(--forest);
+  border-radius: var(--radius-md);
+  padding: 14px 18px;
+  transition: box-shadow 220ms var(--ease-out), transform 220ms var(--ease-out);
+}
+
+.search-bar:focus-within {
+  box-shadow: 4px 4px 0 var(--coral);
+  transform: translate(-2px, -2px);
+}
+
+.search-bar__icon {
+  color: var(--forest);
+  flex-shrink: 0;
+}
+
+.search-bar__input {
+  flex: 1;
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  font-size: 1rem;
+  font-family: inherit;
+}
+
+.search-bar__input::placeholder {
+  color: var(--text-muted);
+}
+
+.search-bar__clear {
+  font-size: 1.4rem;
+  line-height: 1;
+  color: var(--text-muted);
+  padding: 2px 6px;
+  border-radius: 8px;
+  transition: color 180ms ease, background 180ms ease;
+}
+
+.search-bar__clear:hover {
+  color: var(--forest);
+  background: var(--cream-deep);
+}
+
+.controls__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.controls__count {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.controls__count strong {
+  color: var(--forest);
+  font-weight: 600;
+}
+
+.sort-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--forest);
+  border: 2px solid var(--forest);
+  padding: 8px 14px;
+  border-radius: 999px;
+  transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+}
+
+.sort-toggle:hover {
+  background: var(--lavender);
+  transform: translate(-2px, -2px);
+  box-shadow: 3px 3px 0 var(--forest);
+}
+
+.sort-toggle svg {
+  transition: transform 220ms var(--ease-out);
+}
+
+.sort-toggle[aria-pressed="true"] svg {
+  transform: rotate(180deg);
+}
+
+/* ==========================================================================
+   GRID DE TARJETAS
+   ========================================================================== */
+.rrpp-section {
+  position: relative;
+  z-index: 1;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 48px 24px 80px;
+}
+
+.rrpp-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 24px;
+}
+
+/* Tarjeta individual: plana, tinta verde bosque, sombra dura tipo afiche */
+.rrpp-card {
+  position: relative;
+  background: var(--cream);
+  border: 2px solid var(--forest);
+  border-radius: var(--radius-lg);
+  padding: 28px 22px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-shadow: var(--shadow-hard-sm);
+  opacity: 0;
+  transform: translateY(18px);
+  transition: transform 260ms var(--ease-out), box-shadow 260ms var(--ease-out);
+}
+
+/* Animación de aparición, disparada por JS agregando esta clase */
+.rrpp-card.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  animation: cardIn 560ms var(--ease-out) both;
+}
+
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(18px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.rrpp-card:hover {
+  transform: translate(-4px, -4px);
+  box-shadow: var(--shadow-hard);
+}
+
+.rrpp-card__photo-wrap {
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+  padding: 3px;
+  margin-bottom: 16px;
+  background: linear-gradient(135deg, var(--coral) 0%, var(--lavender-deep) 100%);
+  border: 2px solid var(--forest);
+}
+
+.rrpp-card__photo {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--cream-deep);
+}
+
+.rrpp-card__name {
+  font-family: "Fraunces", serif;
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-bottom: 4px;
+}
+
+.rrpp-card__city {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+.rrpp-card__instagram {
+  font-size: 0.85rem;
+  color: var(--coral-deep);
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.rrpp-card__actions {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: auto;
+}
+
+/* Botón principal de WhatsApp: plano, borde tinta, sombra dura */
+.btn-whatsapp {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 13px 16px;
+  border-radius: var(--radius-sm);
+  border: 2px solid var(--forest);
+  background: var(--whatsapp);
+  color: var(--forest-deep);
+  font-weight: 600;
+  font-size: 0.95rem;
+  box-shadow: 3px 3px 0 var(--forest);
+  transition: transform 180ms var(--ease-out), box-shadow 180ms var(--ease-out);
+}
+
+.btn-whatsapp:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0 var(--forest);
+  background: var(--whatsapp-dark);
+}
+
+.btn-whatsapp svg {
+  flex-shrink: 0;
+}
+
+/* Botón secundario de Instagram: lavanda plano */
+.btn-instagram {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 11px 16px;
+  border-radius: var(--radius-sm);
+  border: 2px solid var(--forest);
+  background: var(--lavender);
+  color: var(--forest-deep);
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+}
+
+.btn-instagram:hover {
+  background: var(--lavender-deep);
+  color: var(--cream);
+  transform: translate(-2px, -2px);
+  box-shadow: 3px 3px 0 var(--forest);
+}
+
+/* ==========================================================================
+   ESTADO VACÍO (sin resultados de búsqueda)
+   ========================================================================== */
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.empty-state__title {
+  font-family: "Fraunces", serif;
+  font-weight: 600;
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+  color: var(--forest);
+}
+
+.empty-state__subtitle {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+/* ==========================================================================
+   CTA FINAL: Comprar entradas online
+   ========================================================================== */
+.final-cta {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 80px 24px 100px;
+}
+
+.final-cta__inner {
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.final-cta__title {
+  font-family: "Fraunces", serif;
+  font-weight: 700;
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  margin-bottom: 10px;
+  color: var(--forest);
+}
+
+.final-cta__subtitle {
+  color: var(--text-muted);
+  margin-bottom: 32px;
+}
+
+.btn-online {
+  display: inline-block;
+  padding: 18px 48px;
+  border-radius: 999px;
+  border: 2px solid var(--forest);
+  font-family: "Fraunces", serif;
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--cream);
+  background: var(--coral);
+  box-shadow: var(--shadow-hard-sm);
+  transition: transform 220ms var(--ease-out), box-shadow 220ms var(--ease-out);
+}
+
+.btn-online:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: var(--shadow-hard);
+  background: var(--coral-deep);
+}
+
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+.site-footer {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 28px 24px 40px;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  border-top: 2px solid var(--forest);
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+@media (min-width: 560px) {
+  .controls__inner {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .search-bar {
+    flex: 1;
+  }
+
+  .controls__meta {
+    flex-shrink: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    min-height: 72vh;
+    padding: 32px 20px 64px;
+  }
+
+  .rrpp-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  .rrpp-card {
+    padding: 20px 14px 18px;
+    border-radius: var(--radius-md);
+  }
+
+  .rrpp-card__photo-wrap {
+    width: 72px;
+    height: 72px;
+  }
+
+  .rrpp-card__name {
+    font-size: 0.95rem;
+  }
+
+  .btn-whatsapp,
+  .btn-instagram {
+    font-size: 0.8rem;
+    padding: 10px 10px;
+  }
+}
+
+@media (max-width: 360px) {
+  .rrpp-grid {
+    grid-template-columns: 1fr;
+  }
+}

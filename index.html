@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EROS | Elegí tu RRPP</title>
+  <meta name="description" content="Encontrá y contactá directamente a un RRPP de EROS para comprar tus entradas por WhatsApp.">
+
+  <!-- Google Fonts: Fraunces (display, look afiche vintage) + Inter (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;0,700;1,500;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ============================= -->
+  <!-- FONDO AMBIENTE (textura de grano de papel, fija detrás de todo) -->
+  <!-- ============================= -->
+  <div class="grain-overlay" aria-hidden="true"></div>
+
+  <!-- ============================= -->
+  <!-- HEADER / HERO -->
+  <!-- ============================= -->
+  <header class="hero">
+    <div class="hero__sun" aria-hidden="true"></div>
+
+    <!-- Ramas florales decorativas, estilo afiche retro -->
+    <svg class="hero__florals hero__florals--left" viewBox="0 0 220 260" fill="none" aria-hidden="true">
+      <path d="M0 10C30 40 45 70 40 110" stroke="#1F3B2A" stroke-width="4" stroke-linecap="round"/>
+      <path d="M40 110C55 130 60 150 50 175" stroke="#1F3B2A" stroke-width="4" stroke-linecap="round"/>
+      <ellipse cx="10" cy="30" rx="30" ry="14" fill="#E85B3F" transform="rotate(-20 10 30)"/>
+      <ellipse cx="30" cy="10" rx="30" ry="14" fill="#E85B3F" transform="rotate(35 30 10)"/>
+      <ellipse cx="45" cy="45" rx="26" ry="12" fill="#B9A0DE" transform="rotate(80 45 45)"/>
+      <circle cx="24" cy="24" r="12" fill="#FBF1DD"/>
+      <ellipse cx="60" cy="95" rx="18" ry="9" fill="#B9A0DE" transform="rotate(-15 60 95)"/>
+      <ellipse cx="60" cy="95" rx="18" ry="9" fill="#B9A0DE" transform="rotate(35 60 95)"/>
+      <circle cx="55" cy="100" r="7" fill="#E4A72C"/>
+      <path d="M40 60C20 65 10 75 4 92" stroke="#1F3B2A" stroke-width="3" stroke-linecap="round"/>
+      <ellipse cx="0" cy="96" rx="16" ry="8" fill="#1F3B2A" transform="rotate(-30 0 96)"/>
+      <ellipse cx="55" cy="145" rx="15" ry="7" fill="#1F3B2A" transform="rotate(20 55 145)"/>
+    </svg>
+    <svg class="hero__florals hero__florals--right" viewBox="0 0 220 260" fill="none" aria-hidden="true">
+      <path d="M0 10C30 40 45 70 40 110" stroke="#1F3B2A" stroke-width="4" stroke-linecap="round"/>
+      <path d="M40 110C55 130 60 150 50 175" stroke="#1F3B2A" stroke-width="4" stroke-linecap="round"/>
+      <ellipse cx="10" cy="30" rx="30" ry="14" fill="#B9A0DE" transform="rotate(-20 10 30)"/>
+      <ellipse cx="30" cy="10" rx="30" ry="14" fill="#B9A0DE" transform="rotate(35 30 10)"/>
+      <ellipse cx="45" cy="45" rx="26" ry="12" fill="#E85B3F" transform="rotate(80 45 45)"/>
+      <circle cx="24" cy="24" r="12" fill="#FBF1DD"/>
+      <ellipse cx="60" cy="95" rx="18" ry="9" fill="#E85B3F" transform="rotate(-15 60 95)"/>
+      <ellipse cx="60" cy="95" rx="18" ry="9" fill="#E85B3F" transform="rotate(35 60 95)"/>
+      <circle cx="55" cy="100" r="7" fill="#E4A72C"/>
+      <path d="M40 60C20 65 10 75 4 92" stroke="#1F3B2A" stroke-width="3" stroke-linecap="round"/>
+      <ellipse cx="0" cy="96" rx="16" ry="8" fill="#1F3B2A" transform="rotate(-30 0 96)"/>
+      <ellipse cx="55" cy="145" rx="15" ry="7" fill="#1F3B2A" transform="rotate(20 55 145)"/>
+    </svg>
+
+    <div class="hero__inner">
+
+      <!-- Wordmark EROS: tinta plana coral con sombra dura estilo afiche -->
+      <div class="hero__logo-wrap">
+        <span class="hero__logo-fallback-text">EROS</span>
+      </div>
+
+      <h1 class="hero__title">Elegí tu RRPP</h1>
+      <p class="hero__subtitle">
+        Contactá directamente con uno de nuestros relacionistas públicos
+        para comprar tus entradas.
+      </p>
+    </div>
+
+    <!-- Flecha de scroll sutil -->
+    <div class="hero__scroll-cue" aria-hidden="true">
+      <span></span>
+    </div>
+  </header>
+
+  <!-- ============================= -->
+  <!-- CONTROLES: BUSCADOR + ORDEN + CONTADOR -->
+  <!-- ============================= -->
+  <section class="controls" id="controles">
+    <div class="controls__inner">
+
+      <div class="search-bar">
+        <svg class="search-bar__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/>
+          <path d="M21 21L16.65 16.65" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <input
+          type="text"
+          id="searchInput"
+          class="search-bar__input"
+          placeholder="Buscá por nombre o ciudad..."
+          autocomplete="off"
+        >
+        <button id="clearSearch" class="search-bar__clear" aria-label="Limpiar búsqueda" hidden>&times;</button>
+      </div>
+
+      <div class="controls__meta">
+        <p class="controls__count" id="rrppCount" aria-live="polite">
+          Cargando RRPP...
+        </p>
+
+        <button id="sortToggle" class="sort-toggle" type="button" aria-pressed="false">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M7 4V20M7 20L3 16M7 20L11 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M17 20V4M17 4L21 8M17 4L13 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>A - Z</span>
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================= -->
+  <!-- GRID DE TARJETAS RRPP -->
+  <!-- ============================= -->
+  <main class="rrpp-section">
+    <div class="rrpp-grid" id="rrppGrid">
+      <!-- Las tarjetas se generan dinámicamente desde script.js -->
+    </div>
+
+    <!-- Estado vacío cuando la búsqueda no encuentra resultados -->
+    <div class="empty-state" id="emptyState" hidden>
+      <p class="empty-state__title">No encontramos ningún RRPP</p>
+      <p class="empty-state__subtitle">Probá con otro nombre o ciudad.</p>
+    </div>
+  </main>
+
+  <!-- ============================= -->
+  <!-- CTA FINAL: COMPRAR ENTRADAS ONLINE -->
+  <!-- ============================= -->
+  <section class="final-cta">
+    <div class="final-cta__inner">
+      <h2 class="final-cta__title">¿Preferís comprar online?</h2>
+      <p class="final-cta__subtitle">Conseguí tu entrada en segundos, sin intermediarios.</p>
+
+      <!-- Modificar únicamente el href de este enlace para cambiar el destino -->
+      <a
+        href="https://app.entraste.com/events/eros"
+        id="onlineTicketsLink"
+        class="btn-online"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Comprar entradas online
+      </a>
+    </div>
+  </section>
+
+  <!-- ============================= -->
+  <!-- FOOTER -->
+  <!-- ============================= -->
+  <footer class="site-footer">
+    <p>&copy; <span id="currentYear"></span> EROS. Todos los derechos reservados.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
