@@ -90,9 +90,9 @@ const RRPP_LIST = [
   {
     nombre: "Facundo Tejera",
     ciudad: "Santa Lucía",
-    instagram: "@facundo.t666",
+    instagram: "@f.t._.666",
     whatsapp: "59891360970",
-    instagramUrl: "https://instagram.com/facundo.t666",
+    instagramUrl: "https://instagram.com/f.t._.666",
   },
   {
     nombre: "Pilar Silva",
