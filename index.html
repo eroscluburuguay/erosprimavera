@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EROS | Elegí tu RRPP</title>
+  <meta name="description" content="Encontrá y contactá directamente a un RRPP de EROS para comprar tus entradas por WhatsApp.">
+
+  <!-- Google Fonts: Poppins (display) + Inter (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ============================= -->
+  <!-- FONDO AMBIENTE (glow decorativo) -->
+  <!-- ============================= -->
+  <div class="ambient-glow ambient-glow--one" aria-hidden="true"></div>
+  <div class="ambient-glow ambient-glow--two" aria-hidden="true"></div>
+
+  <!-- ============================= -->
+  <!-- HEADER / HERO -->
+  <!-- ============================= -->
+  <header class="hero">
+    <div class="hero__inner">
+
+      <!-- Logo EROS: reemplazar el src cuando tengas el archivo definitivo -->
+      <div class="hero__logo-wrap">
+        <img
+          src="img/logo-eros.png"
+          alt="EROS"
+          class="hero__logo"
+          onerror="this.style.display='none'; this.parentElement.classList.add('hero__logo-wrap--fallback');"
+        >
+        <span class="hero__logo-fallback-text">EROS</span>
+      </div>
+
+      <h1 class="hero__title">Elegí tu RRPP</h1>
+      <p class="hero__subtitle">
+        Contactá directamente con uno de nuestros relacionistas públicos
+        para comprar tus entradas.
+      </p>
+    </div>
+
+    <!-- Flecha de scroll sutil -->
+    <div class="hero__scroll-cue" aria-hidden="true">
+      <span></span>
+    </div>
+  </header>
+
+  <!-- ============================= -->
+  <!-- CONTROLES: BUSCADOR + ORDEN + CONTADOR -->
+  <!-- ============================= -->
+  <section class="controls" id="controles">
+    <div class="controls__inner">
+
+      <div class="search-bar">
+        <svg class="search-bar__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/>
+          <path d="M21 21L16.65 16.65" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <input
+          type="text"
+          id="searchInput"
+          class="search-bar__input"
+          placeholder="Buscá por nombre o ciudad..."
+          autocomplete="off"
+        >
+        <button id="clearSearch" class="search-bar__clear" aria-label="Limpiar búsqueda" hidden>&times;</button>
+      </div>
+
+      <div class="controls__meta">
+        <p class="controls__count" id="rrppCount" aria-live="polite">
+          Cargando RRPP...
+        </p>
+
+        <button id="sortToggle" class="sort-toggle" type="button" aria-pressed="false">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M7 4V20M7 20L3 16M7 20L11 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M17 20V4M17 4L21 8M17 4L13 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>A - Z</span>
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================= -->
+  <!-- GRID DE TARJETAS RRPP -->
+  <!-- ============================= -->
+  <main class="rrpp-section">
+    <div class="rrpp-grid" id="rrppGrid">
+      <!-- Las tarjetas se generan dinámicamente desde script.js -->
+    </div>
+
+    <!-- Estado vacío cuando la búsqueda no encuentra resultados -->
+    <div class="empty-state" id="emptyState" hidden>
+      <p class="empty-state__title">No encontramos ningún RRPP</p>
+      <p class="empty-state__subtitle">Probá con otro nombre o ciudad.</p>
+    </div>
+  </main>
+
+  <!-- ============================= -->
+  <!-- CTA FINAL: COMPRAR ENTRADAS ONLINE -->
+  <!-- ============================= -->
+  <section class="final-cta">
+    <div class="final-cta__inner">
+      <h2 class="final-cta__title">¿Preferís comprar online?</h2>
+      <p class="final-cta__subtitle">Conseguí tu entrada en segundos, sin intermediarios.</p>
+
+      <!-- Modificar únicamente el href de este enlace para cambiar el destino -->
+      <a
+        href="https://app.entraste.com/events/eros"
+        id="onlineTicketsLink"
+        class="btn-online"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Comprar entradas online
+      </a>
+    </div>
+  </section>
+
+  <!-- ============================= -->
+  <!-- FOOTER -->
+  <!-- ============================= -->
+  <footer class="site-footer">
+    <p>&copy; <span id="currentYear"></span> EROS. Todos los derechos reservados.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

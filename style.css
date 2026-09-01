@@ -1,0 +1,694 @@
+/* ==========================================================================
+   EROS · Elegí tu RRPP
+   Design tokens
+   --------------------------------------------------------------------------
+   Paleta:
+     --bg-void       #08070C  fondo principal, casi negro con tinte violeta
+     --bg-surface    #14121B  superficie de tarjetas
+     --bg-surface-2  #1C1926  superficie elevada / hover
+     --accent        #9B5CFF  violeta eléctrico (glow del logo EROS)
+     --accent-2      #C084FF  violeta claro, para degradés
+     --whatsapp      #25D366  verde WhatsApp (reconocible, no se toca)
+     --text-primary  #F5F4F8  blanco plateado (tono del logo cromado)
+     --text-muted    #9A94A8  gris violáceo para texto secundario
+
+   Tipografía:
+     Poppins  -> títulos / display (eco del logo en bloque)
+     Inter    -> cuerpo de texto / UI
+   ========================================================================== */
+
+:root {
+  --bg-void: #08070c;
+  --bg-surface: #14121b;
+  --bg-surface-2: #1c1926;
+  --accent: #9b5cff;
+  --accent-2: #c084ff;
+  --accent-soft: rgba(155, 92, 255, 0.35);
+  --whatsapp: #25d366;
+  --whatsapp-dark: #1ebe5a;
+  --text-primary: #f5f4f8;
+  --text-muted: #9a94a8;
+  --border-soft: rgba(255, 255, 255, 0.08);
+  --radius-lg: 24px;
+  --radius-md: 16px;
+  --radius-sm: 10px;
+  --shadow-soft: 0 20px 50px rgba(0, 0, 0, 0.45);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ==========================================================================
+   Reset básico
+   ========================================================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg-void) url("img/bg-floral.png") center center / cover no-repeat fixed;
+  color: var(--text-primary);
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  line-height: 1.5;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Velo oscuro sobre el fondo floral para mantener contraste y legibilidad */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(8, 7, 12, 0.55) 0%, rgba(8, 7, 12, 0.75) 40%, rgba(8, 7, 12, 0.88) 100%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+@media (max-width: 640px) {
+  body {
+    background-attachment: scroll;
+  }
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: inherit;
+}
+
+/* Foco visible para accesibilidad de teclado */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--accent-2);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ==========================================================================
+   Glow ambiental de fondo (decorativo, fijo detrás de todo)
+   ========================================================================== */
+.ambient-glow {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(120px);
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.18;
+}
+
+.ambient-glow--one {
+  width: 560px;
+  height: 560px;
+  background: var(--accent);
+  top: -180px;
+  left: -120px;
+}
+
+.ambient-glow--two {
+  width: 480px;
+  height: 480px;
+  background: #4b2fa8;
+  bottom: -160px;
+  right: -140px;
+  opacity: 0.14;
+}
+
+
+/* ==========================================================================
+   Ramas florales decorativas (esquinas del hero)
+   ========================================================================== */
+.hero__florals {
+  position: absolute;
+  top: 0;
+  width: 220px;
+  max-width: 34vw;
+  height: auto;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.95;
+}
+
+.hero__florals--left {
+  left: 0;
+}
+
+.hero__florals--right {
+  right: 0;
+  transform: scaleX(-1);
+}
+
+@media (max-width: 640px) {
+  .hero__florals {
+    width: 140px;
+  }
+}
+
+/* ==========================================================================
+   HERO
+   ========================================================================== */
+.hero {
+  position: relative;
+  z-index: 1;
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px 24px 80px;
+  overflow: hidden;
+}
+
+
+/* ==========================================================================
+   HERO
+   ========================================================================== */
+.hero {
+  position: relative;
+  z-index: 1;
+  min-height: 88vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px 24px 80px;
+}
+
+.hero__inner {
+  max-width: 640px;
+  animation: rise 900ms var(--ease-out) both;
+}
+
+.hero__logo-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 36px;
+  min-height: 64px;
+}
+
+.hero__logo {
+  height: 400px;
+  width: auto;
+  filter: drop-shadow(0 0 24px rgba(155, 92, 255, 0.55));
+}
+
+/* Si no existe img/logo-eros.png, se muestra el nombre en texto cromado */
+.hero__logo-fallback-text {
+  display: none;
+  font-family: "Poppins", sans-serif;
+  font-weight: 800;
+  font-size: 2.4rem;
+  letter-spacing: 0.08em;
+  background: linear-gradient(180deg, #ffffff 0%, #cfcfd6 45%, #8f8f9a 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 22px rgba(155, 92, 255, 0.6));
+}
+
+.hero__logo-wrap--fallback .hero__logo-fallback-text {
+  display: inline-block;
+}
+
+.hero__title {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: clamp(2.2rem, 6vw, 3.4rem);
+  letter-spacing: -0.01em;
+  margin-bottom: 18px;
+  background: linear-gradient(180deg, #ffffff 0%, #d8d3e6 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.hero__subtitle {
+  font-size: clamp(1rem, 2.4vw, 1.15rem);
+  color: var(--text-muted);
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.hero__scroll-cue {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 26px;
+  height: 42px;
+  border: 2px solid var(--border-soft);
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  padding-top: 8px;
+}
+
+.hero__scroll-cue span {
+  width: 4px;
+  height: 8px;
+  border-radius: 2px;
+  background: var(--accent-2);
+  animation: scrollCue 1.8s ease-in-out infinite;
+}
+
+@keyframes scrollCue {
+  0% { opacity: 0; transform: translateY(0); }
+  30% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(14px); }
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================================================
+   CONTROLES: buscador / orden / contador
+   ========================================================================== */
+.controls {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(8, 7, 12, 0.82);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--border-soft);
+  padding: 20px 24px;
+}
+
+.controls__inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-md);
+  padding: 14px 18px;
+  transition: border-color 220ms var(--ease-out), box-shadow 220ms var(--ease-out);
+}
+
+.search-bar:focus-within {
+  border-color: var(--accent-soft);
+  box-shadow: 0 0 0 4px rgba(155, 92, 255, 0.15);
+}
+
+.search-bar__icon {
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.search-bar__input {
+  flex: 1;
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  font-size: 1rem;
+  font-family: inherit;
+}
+
+.search-bar__input::placeholder {
+  color: var(--text-muted);
+}
+
+.search-bar__clear {
+  font-size: 1.4rem;
+  line-height: 1;
+  color: var(--text-muted);
+  padding: 2px 6px;
+  border-radius: 8px;
+  transition: color 180ms ease, background 180ms ease;
+}
+
+.search-bar__clear:hover {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.controls__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.controls__count {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.controls__count strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.sort-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  border: 1px solid var(--border-soft);
+  padding: 8px 14px;
+  border-radius: 999px;
+  transition: color 180ms ease, border-color 180ms ease, background 180ms ease;
+}
+
+.sort-toggle:hover {
+  color: var(--text-primary);
+  border-color: var(--accent-soft);
+  background: rgba(155, 92, 255, 0.08);
+}
+
+.sort-toggle svg {
+  transition: transform 220ms var(--ease-out);
+}
+
+.sort-toggle[aria-pressed="true"] svg {
+  transform: rotate(180deg);
+}
+
+/* ==========================================================================
+   GRID DE TARJETAS
+   ========================================================================== */
+.rrpp-section {
+  position: relative;
+  z-index: 1;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 48px 24px 80px;
+}
+
+.rrpp-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 24px;
+}
+
+/* Tarjeta individual: glassmorphism sutil + borde cromado-violeta */
+.rrpp-card {
+  position: relative;
+  background: linear-gradient(180deg, var(--bg-surface) 0%, var(--bg-surface-2) 100%);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-lg);
+  padding: 28px 22px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-shadow: var(--shadow-soft);
+  opacity: 0;
+  transform: translateY(18px);
+  transition: transform 320ms var(--ease-out), box-shadow 320ms var(--ease-out),
+    border-color 320ms var(--ease-out);
+}
+
+/* Animación de aparición, disparada por JS agregando esta clase */
+.rrpp-card.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  animation: cardIn 560ms var(--ease-out) both;
+}
+
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(18px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.rrpp-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(155, 92, 255, 0.5);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(155, 92, 255, 0.25),
+    0 0 32px rgba(155, 92, 255, 0.25);
+}
+
+.rrpp-card__photo-wrap {
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+  padding: 3px;
+  margin-bottom: 16px;
+  background: linear-gradient(135deg, var(--accent) 0%, #4b2fa8 100%);
+  transition: box-shadow 320ms var(--ease-out);
+}
+
+.rrpp-card:hover .rrpp-card__photo-wrap {
+  box-shadow: 0 0 22px rgba(155, 92, 255, 0.55);
+}
+
+.rrpp-card__photo {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--bg-surface-2);
+  border: 2px solid var(--bg-void);
+}
+
+.rrpp-card__name {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-bottom: 4px;
+}
+
+.rrpp-card__city {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+.rrpp-card__instagram {
+  font-size: 0.85rem;
+  color: var(--accent-2);
+  margin-bottom: 20px;
+}
+
+.rrpp-card__actions {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: auto;
+}
+
+/* Botón principal de WhatsApp: grande y llamativo */
+.btn-whatsapp {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 13px 16px;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(135deg, var(--whatsapp) 0%, var(--whatsapp-dark) 100%);
+  color: #08120b;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: transform 200ms var(--ease-out), box-shadow 200ms var(--ease-out);
+}
+
+.btn-whatsapp:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 26px rgba(37, 211, 102, 0.35);
+}
+
+.btn-whatsapp svg {
+  flex-shrink: 0;
+}
+
+/* Botón secundario de Instagram */
+.btn-instagram {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 11px 16px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-soft);
+  color: var(--text-primary);
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: border-color 200ms ease, background 200ms ease, transform 200ms ease;
+}
+
+.btn-instagram:hover {
+  border-color: var(--accent-soft);
+  background: rgba(155, 92, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   ESTADO VACÍO (sin resultados de búsqueda)
+   ========================================================================== */
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.empty-state__title {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+}
+
+.empty-state__subtitle {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+/* ==========================================================================
+   CTA FINAL: Comprar entradas online
+   ========================================================================== */
+.final-cta {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 80px 24px 100px;
+}
+
+.final-cta__inner {
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.final-cta__title {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  margin-bottom: 10px;
+}
+
+.final-cta__subtitle {
+  color: var(--text-muted);
+  margin-bottom: 32px;
+}
+
+.btn-online {
+  display: inline-block;
+  padding: 18px 48px;
+  border-radius: 999px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--text-primary);
+  background: linear-gradient(135deg, var(--accent) 0%, #6b2fd6 100%);
+  box-shadow: 0 16px 40px rgba(155, 92, 255, 0.35);
+  transition: transform 220ms var(--ease-out), box-shadow 220ms var(--ease-out);
+}
+
+.btn-online:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 20px 50px rgba(155, 92, 255, 0.5);
+}
+
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+.site-footer {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 28px 24px 40px;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  border-top: 1px solid var(--border-soft);
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+@media (min-width: 560px) {
+  .controls__inner {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .search-bar {
+    flex: 1;
+  }
+
+  .controls__meta {
+    flex-shrink: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    min-height: 78vh;
+    padding: 32px 20px 64px;
+  }
+
+  .rrpp-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  .rrpp-card {
+    padding: 20px 14px 18px;
+    border-radius: var(--radius-md);
+  }
+
+  .rrpp-card__photo-wrap {
+    width: 72px;
+    height: 72px;
+  }
+
+  .rrpp-card__name {
+    font-size: 0.95rem;
+  }
+
+  .btn-whatsapp,
+  .btn-instagram {
+    font-size: 0.8rem;
+    padding: 10px 10px;
+  }
+}
+
+@media (max-width: 360px) {
+  .rrpp-grid {
+    grid-template-columns: 1fr;
+  }
+}
