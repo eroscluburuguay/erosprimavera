@@ -43,7 +43,7 @@
   --bg-floral-image: url("img/bg-floral.png"); /* ruta de la imagen */
   --bg-floral-size: 100%;              /* cover | contain | 100% 100% | 800px auto, etc. */
   --bg-floral-position: center center;  /* ej: center top, left center, 50% 30% */
-  --bg-floral-repeat: no-repeat;        /* no-repeat | repeat | repeat-x | repeat-y */
+  --bg-floral-repeat: repeat-y;        /* no-repeat | repeat | repeat-x | repeat-y */
   --bg-floral-attachment: fixed;        /* fixed (efecto parallax) | scroll (se mueve con la página) */
   --bg-floral-opacity: 1;               /* 0 a 1, opacidad de la imagen en sí */
 
