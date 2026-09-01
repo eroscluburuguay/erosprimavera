@@ -48,14 +48,20 @@
 html {
   scroll-behavior: smooth;
 }
-
 body {
-  background: var(--bg-void) url("img/bg-floral.png") center center / cover no-repeat fixed;
+  background: var(--bg-void) url("img/bg-floral.png") center center / cover no-repeat scroll;
   color: var(--text-primary);
   font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
   line-height: 1.5;
   overflow-x: hidden;
   position: relative;
+}
+
+/* En mobile, agrandamos el % del fondo para que las flores se vean MÁS CHICAS */
+@media (max-width: 640px) {
+  body {
+    background-size: 180%;
+  }
 }
 
 /* Velo oscuro sobre el fondo floral para mantener contraste y legibilidad */
