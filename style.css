@@ -41,7 +41,7 @@
      sin tocar el resto del CSS.
      -------------------------------------------------------------------- */
   --bg-floral-image: url("img/bg-floral.png"); /* ruta de la imagen */
-  --bg-floral-size: cover;              /* cover | contain | 100% 100% | 800px auto, etc. */
+  --bg-floral-size: 100%;              /* cover | contain | 100% 100% | 800px auto, etc. */
   --bg-floral-position: center center;  /* ej: center top, left center, 50% 30% */
   --bg-floral-repeat: no-repeat;        /* no-repeat | repeat | repeat-x | repeat-y */
   --bg-floral-attachment: fixed;        /* fixed (efecto parallax) | scroll (se mueve con la página) */
