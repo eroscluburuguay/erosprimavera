@@ -49,13 +49,32 @@ html {
   scroll-behavior: smooth;
 }
 
+html {
+  scroll-behavior: smooth;
+  /* Fondo también en html: en iOS/Android "fixed" en body puede no pintar,
+     así que el fondo real vive acá y usa scroll (más compatible en mobile). */
+  background: var(--bg-void) url("img/bg-floral.png") center top / cover no-repeat scroll;
+  min-height: 100%;
+}
+
 body {
-  background: var(--bg-void) url("img/bg-floral.png") center center / cover no-repeat fixed;
+  background: transparent;
   color: var(--text-primary);
   font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
   line-height: 1.5;
   overflow-x: hidden;
   position: relative;
+  min-height: 100vh;
+}
+
+/* Velo oscuro sobre el fondo floral para mantener contraste y legibilidad */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(8, 7, 12, 0.55) 0%, rgba(8, 7, 12, 0.75) 40%, rgba(8, 7, 12, 0.88) 100%);
+  z-index: 0;
+  pointer-events: none;
 }
 
 /* Velo oscuro sobre el fondo floral para mantener contraste y legibilidad */
