@@ -34,6 +34,19 @@
   --radius-sm: 10px;
   --shadow-soft: 0 20px 50px rgba(0, 0, 0, 0.45);
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+ /* Background floral control variables
+    Ajusta estas variables para cambiar cómo se escala/posiciona img/bg-floral.png
+    Ejemplos:
+      --bg-floral-size: cover;          (rellena, recorta)
+      --bg-floral-size: contain;        (mantiene proporción, puede dejar espacio)
+      --bg-floral-size: 100% auto;      (ajusta al ancho)
+      --bg-floral-size: auto 100%;      (ajusta al alto)
+ */
+ --bg-floral-position: center center;
+ --bg-floral-size: 100% 100%; /* default: ocupa ancho y alto, puede deformar */
+ --bg-floral-repeat: no-repeat;
+ --bg-floral-attachment: fixed;
 }
 
 /* ==========================================================================
@@ -53,7 +66,12 @@ html {
   scroll-behavior: smooth;
   /* Fondo también en html: en iOS/Android "fixed" en body puede no pintar,
      así que el fondo real vive acá y usa scroll (más compatible en mobile). */
-  background: var(--bg-void) url("img/bg-floral.png") center center / 100% 100% no-repeat fixed;
+  background-color: var(--bg-void);
+  background-image: url("img/bg-floral.png");
+  background-position: var(--bg-floral-position);
+  background-size: var(--bg-floral-size);
+  background-repeat: var(--bg-floral-repeat);
+  background-attachment: var(--bg-floral-attachment);
   min-height: 100%;
 }
 
