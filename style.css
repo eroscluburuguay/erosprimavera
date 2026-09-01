@@ -1,19 +1,19 @@
 /* ==========================================================================
-   EROS Â· ElegÃ­ tu RRPP
+   EROS · Elegí tu RRPP
    Design tokens
    --------------------------------------------------------------------------
    Paleta:
      --bg-void       #08070C  fondo principal, casi negro con tinte violeta
      --bg-surface    #14121B  superficie de tarjetas
      --bg-surface-2  #1C1926  superficie elevada / hover
-     --accent        #9B5CFF  violeta elÃ©ctrico (glow del logo EROS)
-     --accent-2      #C084FF  violeta claro, para degradÃ©s
+     --accent        #9B5CFF  violeta eléctrico (glow del logo EROS)
+     --accent-2      #C084FF  violeta claro, para degradés
      --whatsapp      #25D366  verde WhatsApp (reconocible, no se toca)
      --text-primary  #F5F4F8  blanco plateado (tono del logo cromado)
-     --text-muted    #9A94A8  gris violÃ¡ceo para texto secundario
+     --text-muted    #9A94A8  gris violáceo para texto secundario
 
-   TipografÃ­a:
-     Poppins  -> tÃ­tulos / display (eco del logo en bloque)
+   Tipografía:
+     Poppins  -> títulos / display (eco del logo en bloque)
      Inter    -> cuerpo de texto / UI
    ========================================================================== */
 
@@ -34,10 +34,28 @@
   --radius-sm: 10px;
   --shadow-soft: 0 20px 50px rgba(0, 0, 0, 0.45);
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* ------------------------------------------------------------------------
+     FONDO FLORAL — panel de configuración
+     Ajustá estos valores para modificar la imagen de fondo (img/bg-floral.png)
+     sin tocar el resto del CSS.
+     -------------------------------------------------------------------- */
+  --bg-floral-image: url("img/bg-floral.png"); /* ruta de la imagen */
+  --bg-floral-size: cover;              /* cover | contain | 100% 100% | 800px auto, etc. */
+  --bg-floral-position: center center;  /* ej: center top, left center, 50% 30% */
+  --bg-floral-repeat: no-repeat;        /* no-repeat | repeat | repeat-x | repeat-y */
+  --bg-floral-attachment: fixed;        /* fixed (efecto parallax) | scroll (se mueve con la página) */
+  --bg-floral-opacity: 1;               /* 0 a 1, opacidad de la imagen en sí */
+
+  /* Velo oscuro sobre la imagen, para mantener contraste y legibilidad */
+  --bg-floral-overlay-color: 8, 7, 12;   /* color del velo en formato "R, G, B" */
+  --bg-floral-overlay-top: 0.55;         /* opacidad del velo arriba (0 a 1) */
+  --bg-floral-overlay-mid: 0.75;         /* opacidad del velo al medio (0 a 1) */
+  --bg-floral-overlay-bottom: 0.88;      /* opacidad del velo abajo (0 a 1) */
 }
 
 /* ==========================================================================
-   Reset bÃ¡sico
+   Reset básico
    ========================================================================== */
 * {
   margin: 0;
@@ -48,8 +66,14 @@
 html {
   scroll-behavior: smooth;
 }
+
 body {
-  background: var(--bg-void) url("img/bg-floral.png") center center / cover no-repeat scroll;
+  background-color: var(--bg-void);
+  background-image: var(--bg-floral-image);
+  background-position: var(--bg-floral-position);
+  background-size: var(--bg-floral-size);
+  background-repeat: var(--bg-floral-repeat);
+  background-attachment: var(--bg-floral-attachment);
   color: var(--text-primary);
   font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
   line-height: 1.5;
@@ -57,11 +81,15 @@ body {
   position: relative;
 }
 
-/* En mobile, agrandamos el % del fondo para que las flores se vean MÁS CHICAS */
-@media (max-width: 640px) {
-  body {
-    background-size: 180%;
-  }
+/* Capa que controla la opacidad de la imagen floral en sí */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-color: var(--bg-void);
+  opacity: calc(1 - var(--bg-floral-opacity));
+  z-index: 0;
+  pointer-events: none;
 }
 
 /* Velo oscuro sobre el fondo floral para mantener contraste y legibilidad */
@@ -69,7 +97,12 @@ body::before {
   content: "";
   position: fixed;
   inset: 0;
-  background: linear-gradient(180deg, rgba(8, 7, 12, 0.55) 0%, rgba(8, 7, 12, 0.75) 40%, rgba(8, 7, 12, 0.88) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(var(--bg-floral-overlay-color), var(--bg-floral-overlay-top)) 0%,
+    rgba(var(--bg-floral-overlay-color), var(--bg-floral-overlay-mid)) 40%,
+    rgba(var(--bg-floral-overlay-color), var(--bg-floral-overlay-bottom)) 100%
+  );
   z-index: 0;
   pointer-events: none;
 }
@@ -118,7 +151,7 @@ input:focus-visible {
 }
 
 /* ==========================================================================
-   Glow ambiental de fondo (decorativo, fijo detrÃ¡s de todo)
+   Glow ambiental de fondo (decorativo, fijo detrás de todo)
    ========================================================================== */
 .ambient-glow {
   position: fixed;
@@ -446,7 +479,7 @@ input:focus-visible {
     border-color 320ms var(--ease-out);
 }
 
-/* AnimaciÃ³n de apariciÃ³n, disparada por JS agregando esta clase */
+/* Animación de aparición, disparada por JS agregando esta clase */
 .rrpp-card.is-visible {
   opacity: 1;
   transform: translateY(0);
@@ -518,7 +551,7 @@ input:focus-visible {
   margin-top: auto;
 }
 
-/* BotÃ³n principal de WhatsApp: grande y llamativo */
+/* Botón principal de WhatsApp: grande y llamativo */
 .btn-whatsapp {
   display: inline-flex;
   align-items: center;
@@ -543,7 +576,7 @@ input:focus-visible {
   flex-shrink: 0;
 }
 
-/* BotÃ³n secundario de Instagram */
+/* Botón secundario de Instagram */
 .btn-instagram {
   display: inline-flex;
   align-items: center;
@@ -566,7 +599,7 @@ input:focus-visible {
 }
 
 /* ==========================================================================
-   ESTADO VACÃO (sin resultados de bÃºsqueda)
+   ESTADO VACÍO (sin resultados de búsqueda)
    ========================================================================== */
 .empty-state {
   text-align: center;
