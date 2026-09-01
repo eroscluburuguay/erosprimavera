@@ -53,7 +53,7 @@ html {
   scroll-behavior: smooth;
   /* Fondo también en html: en iOS/Android "fixed" en body puede no pintar,
      así que el fondo real vive acá y usa scroll (más compatible en mobile). */
-  background: var(--bg-void) url("img/bg-floral.png") center top / 100% auto no-repeat scroll;
+  background: var(--bg-void) url("img/bg-floral.png") center center / 100% 100% no-repeat fixed;
   min-height: 100%;
 }
 
